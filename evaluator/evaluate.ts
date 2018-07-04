@@ -1,12 +1,13 @@
 import { specialForms } from "./specialForms";
 import Expression from '../types/Expression';
+import Scope from "../types/Scope";
 
 /**
  * Evaluates an expression and returns the result.
  * @param expr The expression to evaluate.
  * @param scope The scope at which to evaluate the expression.
  */
-export default function evaluate(expr: Expression, scope): any {
+export default function evaluate(expr: Expression, scope: Scope): any {
   if (expr.type == "value") {
     return expr.value;
   } else if (expr.type == "word") {

@@ -1,5 +1,6 @@
 import skipSpace from '../util/skipSpace';
 import parseApply from "./parseApply";
+import Expression from '../types/Expression';
 
 /**
  * Parses a program into expressions.

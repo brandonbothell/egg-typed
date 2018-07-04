@@ -7,7 +7,7 @@ import Expression from '../types/Expression';
  * @param expr The expression to check for functions.
  * @param program The rest of the program.
  */
-export default function parseApply(expr: Expression, program: string) {
+export default function parseApply(expr: Expression, program: string): {expr: Expression, rest: string} {
   program = skipSpace(program);
   if (program[0] != "(") {
     return {expr: expr, rest: program};
