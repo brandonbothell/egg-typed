@@ -1,7 +1,6 @@
 import evaluate from './evaluate';
 import Expression from '../types/Expression';
 import Scope from '../types/Scope';
-import { ExecOptionsWithBufferEncoding } from 'child_process';
 
 export const specialForms = Object.create(null);
 
