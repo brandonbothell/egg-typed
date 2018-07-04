@@ -1,23 +1,25 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es6",
-		"outDir": "out",
-		"rootDir": "",
-		"lib": [ "es6" ],
-		"sourceMap": true
-	},
-	"include": [
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "out",
+    "rootDir": "",
+    "lib": [
+      "es6"
+    ],
+    "sourceMap": true
+  },
+  "include": [
     "evaluator",
     "parser",
     "scopes",
     "types",
     "util",
     "index.ts"
-	],
-	"exclude": [
+  ],
+  "exclude": [
     "node_modules",
     "out",
     "examples"
-	]
+  ]
 }
