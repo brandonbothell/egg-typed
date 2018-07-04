@@ -10,7 +10,7 @@ for (let op of ["+", "-", "*", "/", "==", "<", ">"]) {
   topScope[op] = Function("a, b", `return a ${op} b;`);
 }
 
-topScope.print = (...values) => {
+topScope.print = (...values): string => {
   let valuesString = ""
   for (let i = 0; i < values.length; i++) {
     valuesString += values[i]
@@ -19,14 +19,14 @@ topScope.print = (...values) => {
   return valuesString;
 };
 
-topScope.array = (...items) => {
+topScope.array = (...items): any[] => {
   return items
 }
 
-topScope.sizeof = (array: any[]) => {
+topScope.sizeof = (array: any[]): number => {
   return array.length;
 };
 
-topScope.element = (array: any[], index: number) => {
+topScope.element = (array: any[], index: number): any => {
   return array[index];
 };
