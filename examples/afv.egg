@@ -1,4 +1,4 @@
-# since egg has no default scope, everything needs to be in a do() function.
+# since egg only allows for one application per file, everything needs to be in a do() function.
 do(
   # using the define() function, we create a function called sum that takes in a parameter called array.
   define(sum, fun(array,
@@ -13,7 +13,7 @@ do(
         do(
           # we set sum to itself plus the value at array[i]
           set(sum, +(sum, element(array, i))),
-          # and we set i to itself plus 1
+          # and we set i to itself plus 1.
           set(i, +(i, 1))
         )
       ),
@@ -22,6 +22,6 @@ do(
     )
   )),
   # we print the return of out sum() function, taking in an array instantiated with the values [1, 2, 3].
-  print(sum(array(1, 2, 3)))
+  print("Sum of all items in array [1, 2, 3]: ", sum(array(1, 2, 3)))
   # -> 6
 )

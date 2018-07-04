@@ -1,7 +1,8 @@
-# since egg has no default scope, everything needs to be in a do() function.
+# since egg only allows for one application per file, everything needs to be in a do() function.
 do(
-  # we define the variable x as the number 4.
+  # we define the variable x as the number 4, and print it's value.
   define(x, 4),
+  print("The value of x: ", x),
   # we create a function called setx, that takes in a var called value.
   define(setx, fun(val, 
     # like javascript, if x isn't in our localscope, we'll go up scopes until we find it.
@@ -11,6 +12,6 @@ do(
   # we call the setx function with the val as 50.
   setx(50),
   # we print x.
-  print(x)
+  print("The value of x after setx(50): ", x)
   # -> 50
 )
