@@ -12,6 +12,7 @@ paths.forEach(function runPaths(val: string) {
 
   console.log(`${val}: `);
   run(program);
+  console.log(`\n`);
 });
 
 /**
