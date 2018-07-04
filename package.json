@@ -4,7 +4,8 @@
   "description": "A programming language interpreter.",
   "main": "out/index.js",
   "scripts": {
-    "test": "node out/index examples/set.egg examples/arraysFunctionsVariables.egg"
+    "test": "npm run compile && node out/index examples/set.egg examples/afv.egg",
+    "compile": "tsc -p ./tsconfig.json"
   },
   "keywords": [
     "interpreter"
@@ -13,7 +14,8 @@
   "license": "GPL-3.0",
   "dependencies": {
     "fs": "0.0.1-security",
-    "tsc": "^1.20150623.0"
+    "tsc": "^1.20150623.0",
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
     "@types/node": "^10.5.1"
