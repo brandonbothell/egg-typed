@@ -1,0 +1,1 @@
+export { topScope } from './topScope';

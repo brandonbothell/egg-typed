@@ -1,0 +1,27 @@
+# since egg has no default scope, everything needs to be in a do() function.
+do(
+  # using the define() function, we create a function called sum that takes in a parameter called array.
+  define(sum, fun(array,
+    # here we must wrap everything in a do() function again, for the same reason as before.
+    do(
+      # we define our iterator and sum.
+      define(i, 0),
+      define(sum, 0),
+      # while i is less than the length of the array we took in
+      while(<(i, sizeof(array)),
+      # we put everything in a do() function for the same reason
+        do(
+          # we set sum to itself plus the value at array[i]
+          set(sum, +(sum, element(array, i))),
+          # and we set i to itself plus 1
+          set(i, +(i, 1))
+        )
+      ),
+      # we return the sum.
+      sum
+    )
+  )),
+  # we print the return of out sum() function, taking in an array instantiated with the values [1, 2, 3].
+  print(sum(array(1, 2, 3)))
+  # -> 6
+)
