@@ -13,6 +13,7 @@
   "author": "jasonhaxstuff",
   "license": "GPL-3.0",
   "dependencies": {
+    "colors": "^1.3.0",
     "fs": "0.0.1-security",
     "tsc": "^1.20150623.0",
     "typescript": "^2.9.2"
