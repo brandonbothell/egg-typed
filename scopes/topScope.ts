@@ -1,5 +1,4 @@
 import Scope from "../types/Scope";
-import Expression from "../types/Expression";
 
 export const topScope: Scope = Object.create(null);
 
