@@ -1,0 +1,9 @@
+# since egg only allows for one application per file, everything needs to be in a do() function.
+do(
+  # we define `callback` to a function that takes in data, you can do whatever with the data from the request
+  define(callback, fun(data, print("Successfully got with http"))),
+  httpGet("http://postman-echo.com/get?foo1=bar1&foo2=bar2", callback),
+
+  # we do the same thing as before but with an inline function and https
+  httpsGet("https://postman-echo.com/get?foo1=bar1&foo2=bar2", fun(data, print("Successfully got with https")))
+)

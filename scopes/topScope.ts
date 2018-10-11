@@ -1,31 +1,62 @@
-import Scope from "../types/Scope";
+import { get as http } from 'http'
+import { get as https } from 'https'
 
-export const topScope: Scope = Object.create(null);
+export const topScope = Object.create(null)
 
-topScope.true = true;
-topScope.false = false;
+topScope.true = true
+topScope.false = false
 
-for (let op of ["+", "-", "*", "/", "==", "<", ">"]) {
-  topScope[op] = Function("a, b", `return a ${op} b;`);
+for (let op of ['+', '-', '*', '/', '==', '<', '>']) {
+  topScope[op] = Function('a, b', `return a ${op} b;`)
 }
 
 topScope.print = (...values): string => {
-  let valuesString = ""
+  let valuesString = ''
+
   for (let i = 0; i < values.length; i++) {
     valuesString += values[i]
   }
-  console.log(valuesString);
-  return valuesString;
-};
+
+  console.log(valuesString)
+  return valuesString
+}
 
 topScope.array = (...items): any[] => {
   return items
 }
 
 topScope.sizeof = (array: any[]): number => {
-  return array.length;
-};
+  return array.length
+}
 
 topScope.element = (array: any[], index: number): any => {
-  return array[index];
-};
+  return array[index]
+}
+
+topScope.httpGet = (url: string, callback: Function): any => {
+  http(url, (res) => {
+    let data = ''
+
+    res.on('data', (chunk) => {
+      data += chunk
+    })
+
+    res.on('end', () => {
+      return callback(data)
+    })
+  })
+}
+
+topScope.httpsGet = (url: string, callback: Function): any => {
+  https(url, (res) => {
+    let data = ''
+
+    res.on('data', (chunk) => {
+      data += chunk
+    })
+
+    res.on('end', () => {
+      return callback(data)
+    })
+  })
+}

@@ -1,1 +1,1 @@
-export { topScope } from './topScope';
+export { topScope } from './topScope'
