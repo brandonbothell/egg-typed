@@ -16,6 +16,9 @@ do(
           # and we set i to itself plus 1.
           set(i, +(i, 1))
         )
+
+        /* multline comment
+        btw */
       ),
       # we return the sum.
       sum

@@ -1,17 +1,22 @@
 import * as fs from 'fs'
 import * as parser from './parser'
-import * as colors from 'colors/safe'
 
-let paths: string[] = process.argv
+const reset = '\x1b[0m'
+const green = '\x1b[32m'
+const underlined = '\x1b[4m'
+const magenta = '\x1b[35m'
+
+const paths: string[] = process.argv
 paths.splice(0, 2)
 
 if (paths.length === 0) {
-  console.log(colors.magenta(`Correct usage: ${colors.green(`node out/index ...<path-to-file-from-project-folder>`)} ${colors.italic(`or`)} ${colors.green(`npm test`)}`))
+  console.log(`${magenta}Correct usage: ${green}node out/index ...<path-to-file-from-project-folder> ${magenta}${underlined}or${reset}${green} npm test${reset}`)
 }
+
 paths.forEach(function runPaths (val: string) {
   const program: string = `${fs.readFileSync(`${val}`)}`
 
-  console.log(`${colors.green(val)}: `)
+  console.log(`${green}${val}: ${reset}`)
   parser.parse(program)
   console.log()
 })

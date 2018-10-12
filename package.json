@@ -12,10 +12,6 @@
   ],
   "author": "jasonhaxstuff",
   "license": "GPL-3.0",
-  "dependencies": {
-    "colors": "^1.3.0",
-    "fs": "0.0.1-security"
-  },
   "devDependencies": {
     "@types/node": "^10.5.1",
     "tslint": "^5.11.0",

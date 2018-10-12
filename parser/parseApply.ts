@@ -1,13 +1,13 @@
 import { skipSpace } from '../util'
 import { parseExpression } from '.'
-import { NumberExpression, StringExpression, WordExpression, ApplyExpression } from '../types'
+import { Expression } from '../types'
 
 /**
  * Checks if the last expression was a function, and parses all of it's parameters.
  * @param expr The expression to check for functions.
  * @param program The rest of the program.
  */
-export function parseApply (expr: NumberExpression | StringExpression | WordExpression | ApplyExpression, program: string): {expr: NumberExpression | StringExpression | WordExpression | ApplyExpression, rest: string} {
+export function parseApply (expr: Expression, program: string): {expr: Expression, rest: string} {
   program = skipSpace(program)
 
   if (program[0] !== '(') {

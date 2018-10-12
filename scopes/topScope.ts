@@ -60,3 +60,7 @@ topScope.httpsGet = (url: string, callback: Function): any => {
     })
   })
 }
+
+topScope.js = (code: string): any => {
+  return eval(code)
+}

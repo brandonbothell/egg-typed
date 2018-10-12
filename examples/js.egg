@@ -1,0 +1,15 @@
+js("
+  const { get } = require('https')
+
+  get('https://example.com', (res) => {
+    let data = ''
+
+    res.on('data', (chunk) => {
+      data += chunk
+    })
+
+    res.on('end', () => {
+      console.log('Fetched data and stuff')
+    })
+  })
+")
