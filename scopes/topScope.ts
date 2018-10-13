@@ -1,5 +1,6 @@
-import { get as http } from 'http'
-import { get as https } from 'https'
+import { get as http, request as httpReq, RequestOptions } from 'http'
+import { get as https, request as httpsReq } from 'https'
+import { parse as parseUrl } from 'url'
 
 export const topScope = Object.create(null)
 
@@ -46,6 +47,27 @@ topScope.HTTP = {
         return callback(data)
       })
     })
+  },
+  post: (url: string, data: any, callback: Function) => {
+    const options = parseUrlToOptions(url)
+    const req = httpReq(options, res => {
+      let data = ''
+
+      res.setEncoding('utf8')
+      res.on('data', chunk => {
+        data += chunk
+      })
+      res.on('end', () => {
+        return callback(data)
+      })
+    })
+
+    req.on('error', error => {
+      throw error
+    })
+
+    req.write(data)
+    req.end()
   }
 }
 
@@ -62,6 +84,27 @@ topScope.HTTPS = {
         return callback(data)
       })
     })
+  },
+  post: (url: string, data: any, callback: Function) => {
+    const options = parseUrlToOptions(url)
+    const req = httpsReq(options, res => {
+      let data = ''
+
+      res.setEncoding('utf8')
+      res.on('data', chunk => {
+        data += chunk
+      })
+      res.on('end', () => {
+        return callback(data)
+      })
+    })
+
+    req.on('error', error => {
+      throw error
+    })
+
+    req.write(data)
+    req.end()
   }
 }
 
@@ -75,5 +118,19 @@ topScope.JSON = {
   },
   string: (json: any, spaces?: number): string => {
     return JSON.stringify(json, null, spaces)
+  }
+}
+
+function parseUrlToOptions (url: string): RequestOptions {
+  const parsed = parseUrl(url)
+
+  return {
+    hostname: parsed.hostname,
+    port: parsed.port ? parsed.port : 443,
+    path: parsed.path,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }
 }

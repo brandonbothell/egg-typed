@@ -9,14 +9,16 @@ import { Expression } from '../types'
 export function parseExpression (program: string) {
   program = skipSpace(program)
 
-  const stringRegex = /^"([^"]*)"/
+  const stringRegex = [ /^"([^"]*)"/, /^'([^']*)'/ ]
   const numberRegex = /^\d+\b/
   const wordRegex = /^[^\s(),#"\[\].]+/
 
   let match: RegExpExecArray
   let expr: Expression
 
-  if (match = stringRegex.exec(program)) {
+  if (match = stringRegex[0].exec(program)) {
+    expr = { type: 'value', value: match[1] }
+  } else if (match = stringRegex[1].exec(program)) {
     expr = { type: 'value', value: match[1] }
   } else if (match = numberRegex.exec(program)) {
     expr = { type: 'value', value: Number(match[0]) }
