@@ -21,44 +21,48 @@ topScope.print = (...values): string => {
   return valuesString
 }
 
-topScope.array = (...items): any[] => {
-  return items
+topScope.Array = {
+  create: (...items): any[] => {
+    return items
+  },
+  size: (array: any[]): number => {
+    return array.length
+  },
+  element: (array: any[], index: number): any => {
+    return array[index]
+  }
 }
 
-topScope.sizeof = (array: any[]): number => {
-  return array.length
+topScope.HTTP = {
+  get: (url: string, callback: Function): any => {
+    http(url, (res) => {
+      let data = ''
+
+      res.on('data', (chunk) => {
+        data += chunk
+      })
+
+      res.on('end', () => {
+        return callback(data)
+      })
+    })
+  }
 }
 
-topScope.element = (array: any[], index: number): any => {
-  return array[index]
-}
+topScope.HTTPS = {
+  get: (url: string, callback: Function): any => {
+    https(url, (res) => {
+      let data = ''
 
-topScope.httpGet = (url: string, callback: Function): any => {
-  http(url, (res) => {
-    let data = ''
+      res.on('data', (chunk) => {
+        data += chunk
+      })
 
-    res.on('data', (chunk) => {
-      data += chunk
+      res.on('end', () => {
+        return callback(data)
+      })
     })
-
-    res.on('end', () => {
-      return callback(data)
-    })
-  })
-}
-
-topScope.httpsGet = (url: string, callback: Function): any => {
-  https(url, (res) => {
-    let data = ''
-
-    res.on('data', (chunk) => {
-      data += chunk
-    })
-
-    res.on('end', () => {
-      return callback(data)
-    })
-  })
+  }
 }
 
 topScope.js = (code: string): any => {

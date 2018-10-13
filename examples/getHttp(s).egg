@@ -10,10 +10,10 @@ do(
     print(JSON["string"](data["args"], 2)),
     print("")
   ))),
-  httpGet("http://postman-echo.com/get?foo1=bar1&foo2=bar2", callback),
+  HTTP["get"]("http://postman-echo.com/get?foo1=bar1&foo2=bar2", callback),
 
   # we do the same thing as before but with an inline function and https
-  httpsGet("https://postman-echo.com/get?foo1=bar1&foo2=bar2", fun(data, do(
+  HTTPS["get"]("https://postman-echo.com/get?foo1=bar1&foo2=bar2", fun(data, do(
     set(data, JSON["parse"](data)),
     print("Successfully got with HTTPS:"),
     print(JSON["string"](data["args"], 2))

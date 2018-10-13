@@ -8,11 +8,11 @@ do(
       define(i, 0),
       define(sum, 0),
       # while i is less than the length of the array we took in
-      while(<(i, sizeof(array)),
+      while(<(i, Array["size"](array)),
       # we put everything in a do() function for the same reason
         do(
           # we set sum to itself plus the value at array[i]
-          set(sum, +(sum, element(array, i))),
+          set(sum, +(sum, Array["element"](array, i))),
           # and we set i to itself plus 1.
           set(i, +(i, 1))
         )
@@ -25,6 +25,6 @@ do(
     )
   )),
   # we print the return of out sum() function, taking in an array instantiated with the values [1, 2, 3].
-  print("Sum of all items in array [1, 2, 3]: ", sum(array(1, 2, 3)))
+  print("Sum of all items in array [1, 2, 3]: ", sum(Array["create"](1, 2, 3)))
   # -> 6
 )
