@@ -49,7 +49,7 @@ topScope.HTTP = {
     })
   },
   post: (url: string, data: any, callback: Function) => {
-    const options = parseUrlToOptions(url)
+    const options = parseUrlToOptions(url, false)
     const req = httpReq(options, res => {
       let data = ''
 
@@ -86,7 +86,7 @@ topScope.HTTPS = {
     })
   },
   post: (url: string, data: any, callback: Function) => {
-    const options = parseUrlToOptions(url)
+    const options = parseUrlToOptions(url, true)
     const req = httpsReq(options, res => {
       let data = ''
 
@@ -121,12 +121,12 @@ topScope.JSON = {
   }
 }
 
-function parseUrlToOptions (url: string): RequestOptions {
+function parseUrlToOptions (url: string, https: boolean): RequestOptions {
   const parsed = parseUrl(url)
 
   return {
     hostname: parsed.hostname,
-    port: parsed.port ? parsed.port : 443,
+    port: parsed.port ? parsed.port : https ? 443 : 80,
     path: parsed.path,
     method: 'POST',
     headers: {
