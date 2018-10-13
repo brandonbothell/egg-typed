@@ -1,4 +1,4 @@
-export type Expression = NumberExpression | StringExpression | WordExpression | ApplyExpression
+export type Expression = NumberExpression | StringExpression | WordExpression | ApplyExpression | PropertyExpression
 
 export type NumberExpression = {
   /**
@@ -51,4 +51,21 @@ export type ApplyExpression = {
    * The type of expression this is.
    */
   type: 'apply'
+}
+
+export type PropertyExpression = {
+  /**
+   * The word we are getting the property from.
+   */
+  operator: Expression
+
+  /**
+   * The property we want from it.
+   */
+  arg: Expression
+
+  /**
+   * The type of expression this is.
+   */
+  type: 'property'
 }

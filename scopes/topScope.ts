@@ -64,3 +64,12 @@ topScope.httpsGet = (url: string, callback: Function): any => {
 topScope.js = (code: string): any => {
   return eval(code)
 }
+
+topScope.JSON = {
+  parse: (json: string): any => {
+    return JSON.parse(json)
+  },
+  string: (json: any, spaces?: number): string => {
+    return JSON.stringify(json, null, spaces)
+  }
+}

@@ -1,5 +1,5 @@
 import { skipSpace } from '../util'
-import { parseExpression } from '.'
+import { parseExpression, parseProperty } from '.'
 import { Expression } from '../types'
 
 /**
@@ -7,11 +7,11 @@ import { Expression } from '../types'
  * @param expr The expression to check for functions.
  * @param program The rest of the program.
  */
-export function parseApply (expr: Expression, program: string): {expr: Expression, rest: string} {
+export function parseApply (expr: Expression, program: string): { expr: Expression, rest: string } {
   program = skipSpace(program)
 
   if (program[0] !== '(') {
-    return { expr: expr, rest: program }
+    return parseProperty(expr, program)
   }
 
   program = skipSpace(program.slice(1))

@@ -1,5 +1,5 @@
 import { skipSpace } from '../util'
-import { parseApply } from '.'
+import { parseApply, parseProperty } from '.'
 import { Expression } from '../types'
 
 /**
@@ -11,7 +11,7 @@ export function parseExpression (program: string) {
 
   const stringRegex = /^"([^"]*)"/
   const numberRegex = /^\d+\b/
-  const wordRegex = /^[^\s(),#"]+/
+  const wordRegex = /^[^\s(),#"\[\].]+/
 
   let match: RegExpExecArray
   let expr: Expression
@@ -26,5 +26,6 @@ export function parseExpression (program: string) {
     throw new SyntaxError('Unexpected syntax: ' + program)
   }
 
-  return parseApply(expr, program.slice(match[0].length))
+  const apply = parseProperty(expr, program.slice(match[0].length))
+  return parseApply(apply.expr, apply.rest)
 }

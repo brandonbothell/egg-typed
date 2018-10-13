@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import * as parser from './parser'
+import { parseAndRun } from './parser'
 
 const reset = '\x1b[0m'
 const green = '\x1b[32m'
@@ -17,6 +17,6 @@ paths.forEach(function runPaths (val: string) {
   const program: string = `${fs.readFileSync(`${val}`)}`
 
   console.log(`${green}${val}: ${reset}`)
-  parser.parse(program)
+  parseAndRun(program)
   console.log()
 })

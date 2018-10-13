@@ -1,3 +1,4 @@
 export { parseExpression } from './parseExpression'
 export { parseApply } from './parseApply'
-export { parse } from './parse'
+export { parseProperty } from './parseProperty'
+export { parseAndRun } from './parse'

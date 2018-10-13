@@ -34,4 +34,12 @@ export function evaluate (expr: Expression, scope): any {
 
     throw new TypeError('Applying a non-function.')
   }
+
+  if (expr.type === 'property') {
+    const { operator, arg } = expr
+    const op = evaluate(operator, scope)
+    const finalArg = evaluate(arg, scope)
+
+    return op[finalArg]
+  }
 }
