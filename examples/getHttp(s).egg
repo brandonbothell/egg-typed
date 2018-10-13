@@ -2,20 +2,17 @@
 do(
   # we define `callback` to a function that takes in data, you can do whatever with the data from the request
   define(callback, fun(data, do(
-    # here, we parse JSON from a string into an object.
+    # here we parse from a string to an object
     set(data, JSON["parse"](data)),
-    print("Successfully got with HTTP:"),
-    # here, we use [ and ] to select a property from an object. Pretty cool, eh?
-    # we also stringify JSON.
-    print(JSON["string"](data["args"], 2)),
-    print("")
+    # here we print data's ip property
+    print(data["origin"])
   ))),
-  HTTP["get"]("http://postman-echo.com/get?foo1=bar1&foo2=bar2", callback),
+  HTTP["get"]("http://httpbin.org/get", callback),
 
-  # we do the same thing as before but with an inline function and https and posting
-  HTTPS["post"]("https://postman-echo.com/post", '{"reason": "testing hjaha"}', fun(data, do(
-    set(data, JSON["parse"](data)),
-    print("Successfully posted with HTTPS:"),
-    print(JSON["string"](data["json"], 2))
-  )))
+  # we do the same thing as before but with an inline callback and https and other methods
+  HTTPS["post"]("https://httpbin.org/post", '{"reason": "testing hjaha"}', fun(data, print("Successfully posted with HTTPS."))),
+
+  HTTPS["put"]("https://httpbin.org/put", '{"reason": "testing hjaha"}', fun(data, print("Successfully put with HTTPS."))),
+
+  HTTPS["delete"]("https://httpbin.org/delete", fun(data, print("Successfully deleted with HTTPS.")))
 )
