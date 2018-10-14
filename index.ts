@@ -14,7 +14,13 @@ if (paths.length === 0) {
 }
 
 paths.forEach(function runPaths (val: string) {
-  const program: string = `${fs.readFileSync(`${val}`)}`
+  let program: string
+
+  try {
+    program = `${fs.readFileSync(`${val}`)}`
+  } catch {
+    return console.log(`${magenta}Correct usage: ${green}node out/index ...<path-to-file-from-project-folder> ${magenta}${underlined}or${reset}${green} npm test${reset}`)
+  }
 
   console.log(`${green}${val}: ${reset}`)
   parseAndRun(program)
