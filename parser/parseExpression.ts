@@ -1,7 +1,6 @@
 import { skipSpace } from '../util'
 import { parseApply, parseProperty } from '.'
 import { Expression } from '../types'
-import { parseDotProperty } from './parseDotProperty'
 
 /**
  * Parses a program into expressions.
@@ -33,8 +32,7 @@ export function parseExpression (program: string, dotProperty: boolean = false) 
     throw new SyntaxError('Unexpected syntax: ' + program)
   }
 
-  const parse = parseProperty(expr, program.slice(match[0].length))
-  const apply = parseDotProperty(parse.expr, parse.rest)
+  const apply = parseProperty(expr, program.slice(match[0].length))
 
   if (!dotProperty) {
     return parseApply(apply.expr, apply.rest)

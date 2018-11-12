@@ -1,5 +1,5 @@
 import { skipSpace } from '../util'
-import { parseExpression } from '.'
+import { parseExpression, parseDotProperty } from '.'
 import { Expression } from '../types'
 
 /**
@@ -11,7 +11,7 @@ export function parseProperty (expr: Expression, program: string): {expr: Expres
   program = skipSpace(program)
 
   if (program[0] !== '[') {
-    return { expr: expr, rest: program }
+    return parseDotProperty(expr, program)
   }
 
   program = skipSpace(program.slice(1))
