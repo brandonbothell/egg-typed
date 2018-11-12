@@ -1,7 +1,5 @@
 import { evaluate } from '.'
-import { Expression, WordExpression, StringExpression } from '../types'
-import * as http from 'http'
-import * as https from 'https'
+import { Expression, WordExpression } from '../types'
 
 export const specialForms = Object.create(null)
 
@@ -85,7 +83,7 @@ specialForms.fun = (args: Expression[], scope): Function => {
 
   return function (): any {
     if (arguments.length !== params.length) {
-      throw new TypeError('Wrong number of arguments')
+      throw new TypeError(`Expected ${params.length} arguments, got ${arguments.length}`)
     }
 
     const localScope = Object.create(scope)

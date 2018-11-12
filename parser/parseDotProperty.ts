@@ -7,24 +7,20 @@ import { Expression } from '../types'
  * @param expr The expression to check for properties.
  * @param program The rest of the program.
  */
-export function parseProperty (expr: Expression, program: string): {expr: Expression, rest: string} {
+export function parseDotProperty (expr: Expression, program: string): {expr: Expression, rest: string} {
   program = skipSpace(program)
 
-  if (program[0] !== '[') {
+  if (program[0] !== '.') {
     return { expr: expr, rest: program }
   }
 
   program = skipSpace(program.slice(1))
   expr = { type: 'property', operator: expr, arg: null }
 
-  const arg = parseExpression(program)
+  const arg = parseExpression(program, true)
 
   expr.arg = arg.expr
   program = skipSpace(arg.rest)
 
-  if (program[0] !== ']') {
-    throw new SyntaxError("Expected ']'")
-  }
-
-  return parseProperty(expr, program.slice(1))
+  return parseDotProperty(expr, program)
 }

@@ -1,12 +1,13 @@
 import { skipSpace } from '../util'
 import { parseApply, parseProperty } from '.'
 import { Expression } from '../types'
+import { parseDotProperty } from './parseDotProperty'
 
 /**
  * Parses a program into expressions.
  * @param program The program to parse.
  */
-export function parseExpression (program: string) {
+export function parseExpression (program: string, dotProperty: boolean = false) {
   program = skipSpace(program)
 
   const stringRegex = [ /^"([^"]*)"/, /^'([^']*)'/ ]
@@ -23,11 +24,21 @@ export function parseExpression (program: string) {
   } else if (match = numberRegex.exec(program)) {
     expr = { type: 'value', value: Number(match[0]) }
   } else if (match = wordRegex.exec(program)) {
-    expr = { type: 'word', name: match[0] }
+    if (!dotProperty) {
+      expr = { type: 'word', name: match[0] }
+    } else {
+      expr = { type: 'value', value: match[0] }
+    }
   } else {
     throw new SyntaxError('Unexpected syntax: ' + program)
   }
 
-  const apply = parseProperty(expr, program.slice(match[0].length))
-  return parseApply(apply.expr, apply.rest)
+  const parse = parseProperty(expr, program.slice(match[0].length))
+  const apply = parseDotProperty(parse.expr, parse.rest)
+
+  if (!dotProperty) {
+    return parseApply(apply.expr, apply.rest)
+  } else {
+    return apply
+  }
 }
