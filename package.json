@@ -13,9 +13,9 @@
   "author": "jasonhaxstuff",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@types/node": "^10.5.1",
-    "tslint": "^5.11.0",
-    "tslint-config-standard": "^8.0.1",
-    "typescript": "^2.9.2"
+    "@types/node": "14.14.2",
+    "tslint": "6.1.3",
+    "tslint-config-standard": "9.0.0",
+    "typescript": "4.0.3"
   }
 }
