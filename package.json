@@ -4,7 +4,7 @@
   "description": "A programming language interpreter.",
   "main": "out/index.js",
   "scripts": {
-    "test": "npm run compile && node out/index examples/set.egg examples/afv.egg 'examples/getHttp(s).egg'",
+    "test": "npm run compile && node out/index examples/set.egg examples/afv.egg \"examples/getHttp(s).egg\"",
     "compile": "tsc -p ./tsconfig.json"
   },
   "keywords": [
