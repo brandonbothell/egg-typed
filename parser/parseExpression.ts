@@ -1,5 +1,5 @@
 import { skipSpace } from '../util'
-import { parseApply, parseProperty } from '.'
+import { parseFunction, parseBracketProperty } from '.'
 import { Expression } from '../types'
 
 /**
@@ -32,10 +32,10 @@ export function parseExpression (program: string, dotProperty: boolean = false) 
     throw new SyntaxError('Unexpected syntax: ' + program)
   }
 
-  const apply = parseProperty(expr, program.slice(match[0].length))
+  const apply = parseBracketProperty(expr, program.slice(match[0].length))
 
   if (!dotProperty) {
-    return parseApply(apply.expr, apply.rest)
+    return parseFunction(apply.expr, apply.rest)
   } else {
     return apply
   }

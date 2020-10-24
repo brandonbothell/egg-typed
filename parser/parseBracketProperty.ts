@@ -7,10 +7,11 @@ import { Expression } from '../types'
  * @param expr The expression to check for properties.
  * @param program The rest of the program.
  */
-export function parseProperty (expr: Expression, program: string): {expr: Expression, rest: string} {
+export function parseBracketProperty (expr: Expression, program: string): {expr: Expression, rest: string} {
   program = skipSpace(program)
 
   if (program[0] !== '[') {
+    // not a bracket property; try the dot property
     return parseDotProperty(expr, program)
   }
 
@@ -26,5 +27,5 @@ export function parseProperty (expr: Expression, program: string): {expr: Expres
     throw new SyntaxError("Expected ']'")
   }
 
-  return parseProperty(expr, program.slice(1))
+  return parseBracketProperty(expr, program.slice(1))
 }

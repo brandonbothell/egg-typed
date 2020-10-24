@@ -1,5 +1,5 @@
 import { skipSpace } from '../util'
-import { parseExpression, parseProperty } from '.'
+import { parseExpression, parseBracketProperty } from '.'
 import { Expression } from '../types'
 
 /**
@@ -7,15 +7,16 @@ import { Expression } from '../types'
  * @param expr The expression to check for functions.
  * @param program The rest of the program.
  */
-export function parseApply (expr: Expression, program: string): { expr: Expression, rest: string } {
+export function parseFunction (expr: Expression, program: string): { expr: Expression, rest: string } {
   program = skipSpace(program)
 
   if (program[0] !== '(') {
-    return parseProperty(expr, program)
+    // definitely not a function; try a bracket property
+    return parseBracketProperty(expr, program)
   }
 
-  program = skipSpace(program.slice(1))
   expr = { type: 'apply', operator: expr, args: [] }
+  program = skipSpace(program.slice(1))
 
   while (program[0] !== ')') {
     const arg = parseExpression(program)
@@ -30,5 +31,5 @@ export function parseApply (expr: Expression, program: string): { expr: Expressi
     }
   }
 
-  return parseApply(expr, program.slice(1))
+  return parseFunction(expr, program.slice(1))
 }

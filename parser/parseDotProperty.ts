@@ -14,8 +14,8 @@ export function parseDotProperty (expr: Expression, program: string): {expr: Exp
     return { expr: expr, rest: program }
   }
 
-  program = skipSpace(program.slice(1))
   expr = { type: 'property', operator: expr, arg: null }
+  program = skipSpace(program.slice(1))
 
   const arg = parseExpression(program, true)
 

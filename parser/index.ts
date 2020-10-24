@@ -1,5 +1,5 @@
 export { parseExpression } from './parseExpression'
-export { parseApply } from './parseApply'
-export { parseProperty } from './parseProperty'
+export { parseFunction } from './parseFunction'
+export { parseBracketProperty } from './parseBracketProperty'
 export { parseAndRun } from './parse'
 export { parseDotProperty } from './parseDotProperty'
