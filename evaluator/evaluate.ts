@@ -32,7 +32,7 @@ export function evaluate (expr: Expression, scope): any {
       return op(...args.map(arg => evaluate(arg, scope)))
     }
 
-    throw new TypeError('Applying a non-function.')
+    throw new TypeError(`Type ${typeof op} is not a function`)
   }
 
   if (expr.type === 'property') {

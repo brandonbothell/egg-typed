@@ -1,10 +1,11 @@
 import { skipSpace } from '../util'
-import { parseFunction, parseBracketProperty } from '.'
+import { parseAnyFunctionCall, parseAnyProperties, parseAnyAssignments, parseAnyDeclarations } from '.'
 import { Expression } from '../types'
 
 /**
- * Parses a program into expressions.
- * @param program The program to parse.
+ * Parses a single expression and any subexpressions.
+ * @param program The program containing the expression to parse.
+ * @param dotProperty Whether or not we're parsing the right-hand side of a dot property expression.
  */
 export function parseExpression (program: string, dotProperty: boolean = false) {
   program = skipSpace(program)
@@ -32,11 +33,14 @@ export function parseExpression (program: string, dotProperty: boolean = false) 
     throw new SyntaxError('Unexpected syntax: ' + program)
   }
 
-  const apply = parseBracketProperty(expr, program.slice(match[0].length))
+  const parsedProperties = parseAnyProperties(expr, program.slice(match[0].length))
+  const parsedAssignments = parseAnyAssignments(parsedProperties.expr, parsedProperties.rest)
+  const parsedDeclarations = parseAnyDeclarations(parsedAssignments.expr, parsedAssignments.rest)
 
-  if (!dotProperty) {
-    return parseFunction(apply.expr, apply.rest)
-  } else {
-    return apply
+  // if we're dealing with a dot property, don't try to parse the property name as a function call, we instead use the property value.
+  if (dotProperty) {
+    return parsedDeclarations
   }
+
+  return parseAnyFunctionCall(parsedDeclarations.expr, parsedDeclarations.rest)
 }

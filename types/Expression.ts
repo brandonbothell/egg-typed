@@ -1,4 +1,4 @@
-export type Expression = NumberExpression | StringExpression | WordExpression | ApplyExpression | PropertyExpression
+export type Expression = NumberExpression | StringExpression | WordExpression | FunctionCallExpression | PropertyExpression
 
 export type NumberExpression = {
   /**
@@ -36,7 +36,7 @@ export type WordExpression = {
   type: 'word'
 }
 
-export type ApplyExpression = {
+export type FunctionCallExpression = {
   /**
    * The `Expression` in a function.
    */

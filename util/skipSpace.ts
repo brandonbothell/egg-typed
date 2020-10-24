@@ -3,8 +3,6 @@
  * @param string The string to skip things in.
  */
 export function skipSpace (str: string): string {
-  // const skipped = skipMultilineComment(str)
-  // console.log(skipped)
   str = str.slice(/^(\s|#.*)*/.exec(str)[0].length)
   return skipMultilineComment(str)
 }

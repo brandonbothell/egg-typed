@@ -1,13 +1,13 @@
 # since egg only allows for one application per file, everything needs to be in a do() function.
 do(
   # we define the variable x as the number 4, and print it's value.
-  define(x, 4),
+  x := 4,
   print("The value of x: ", x),
   # we create a function called setx, that takes in a var called value.
-  define(setx, fun(val, 
+  setx := fun(val, 
     # like javascript, if x isn't in our localscope, we'll go up scopes until we find it.
     # we set x to val.
-    set(x, val))
+    x = val
   ),
   # we call the setx function with the val as 50.
   setx(50),

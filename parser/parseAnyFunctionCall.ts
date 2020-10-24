@@ -1,18 +1,17 @@
 import { skipSpace } from '../util'
-import { parseExpression, parseBracketProperty } from '.'
+import { parseExpression } from '.'
 import { Expression } from '../types'
 
 /**
- * Checks if the last expression was a function, and parses all of it's parameters.
+ * Checks if the last expression was a function call, and parses all of it's parameters.
  * @param expr The expression to check for functions.
  * @param program The rest of the program.
  */
-export function parseFunction (expr: Expression, program: string): { expr: Expression, rest: string } {
+export function parseAnyFunctionCall (expr: Expression, program: string): { expr: Expression, rest: string } {
   program = skipSpace(program)
 
   if (program[0] !== '(') {
-    // definitely not a function; try a bracket property
-    return parseBracketProperty(expr, program)
+    return { expr, rest: program }
   }
 
   expr = { type: 'apply', operator: expr, args: [] }
@@ -31,5 +30,5 @@ export function parseFunction (expr: Expression, program: string): { expr: Expre
     }
   }
 
-  return parseFunction(expr, program.slice(1))
+  return parseAnyFunctionCall(expr, program.slice(1))
 }

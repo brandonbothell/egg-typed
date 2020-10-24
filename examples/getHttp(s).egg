@@ -1,12 +1,12 @@
 # since egg only allows for one application per file, everything needs to be in a do() function.
 do(
   # we define `callback` to a function that takes in data, you can do whatever with the data from the request
-  define(callback, fun(data, do(
+  callback := fun(data, do(
     # here we parse from a string to an object
-    set(data, JSON.parse(data)),
+    data = JSON.parse(data),
     # here we print data's ip property
     print(data.origin)
-  ))),
+  )),
   HTTP.get("http://httpbin.org/get", callback),
 
   # we do the same thing as before but with an inline callback and https and other methods
